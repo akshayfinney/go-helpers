@@ -34,8 +34,13 @@ func downloadModel(url string, modelName string) error {
 }
 
 func main() {
-	modelName := "distilbert-base-uncased"
-	url := "https://huggingface.co/distilbert-base-uncased"
+	if len(os.Args) != 3 {
+		fmt.Println("usage: download url filename")
+		os.Exit(1)
+	}
+	url := os.Args[1]
+	modelName := os.Args[2]
+
 	err := downloadModel(url, modelName)
 	if err != nil {
 		panic(err)
